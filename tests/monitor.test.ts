@@ -15,7 +15,6 @@ import {
   INTERVAL,
   probe,
   record,
-  RETENTION,
   type Env,
   type Snapshot,
 } from "../worker/monitor";
@@ -130,16 +129,25 @@ it.each([
   expect(result.database.status).toBe("unknown");
   expect(JSON.stringify(result)).not.toContain("secret");
 });
-it("records one sample per slot and prunes old history", async () => {
+it("records one sample per slot, prunes 25-hour history and keeps 23-hour history", async () => {
   vi.stubGlobal(
     "fetch",
     vi.fn().mockImplementation(async () => Response.json(good())),
   );
   const now = Math.floor(Date.now() / INTERVAL) * INTERVAL;
+  const hour = 60 * 60 * 1000;
   await env.DB.prepare("INSERT INTO checks VALUES (?, ?, ?, ?)")
     .bind(
-      now - RETENTION - INTERVAL,
-      now - RETENTION,
+      now - 25 * hour,
+      now - 25 * hour,
+      "operational",
+      JSON.stringify(good()),
+    )
+    .run();
+  await env.DB.prepare("INSERT INTO checks VALUES (?, ?, ?, ?)")
+    .bind(
+      now - 23 * hour,
+      now - 23 * hour,
       "operational",
       JSON.stringify(good()),
     )
@@ -148,7 +156,7 @@ it("records one sample per slot and prunes old history", async () => {
   await record(env, now + 1000);
   expect(
     (await env.DB.prepare("SELECT * FROM checks").all()).results,
-  ).toHaveLength(1);
+  ).toHaveLength(2);
 });
 it("serves stored data without probing and detects stale results", async () => {
   const fetcher = vi.fn().mockImplementation(async () => Response.json(good()));
@@ -189,11 +197,19 @@ it("handles first run and validates history windows", async () => {
   expect(
     await (
       await worker.fetch(
-        new Request("https://status.example/api/history?window=7d"),
+        new Request("https://status.example/api/history?window=24h"),
         env,
       )
     ).json(),
   ).toMatchObject({ uptime_percent: null, coverage_percent: 0 });
+  expect(
+    (
+      await worker.fetch(
+        new Request("https://status.example/api/history?window=7d"),
+        env,
+      )
+    ).status,
+  ).toBe(400);
 });
 it("storage failures do not expose D1 internals", async () => {
   const broken = {

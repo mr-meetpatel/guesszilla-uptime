@@ -2,14 +2,15 @@
 
 An independent, lightweight public status dashboard for the Wordle Slack bot.
 Cloudflare Workers hosts the page and API; a scheduled Worker checks Render every
-three minutes and retains seven days of samples in Cloudflare D1. No monitoring
+three minutes and retains one day of samples in Cloudflare D1. Every scheduled
+check deletes samples older than 24 hours. No monitoring
 history is written to Supabase and no database credentials leave the backend.
 
 ## How it works
 
 `Cloudflare cron → Render /health/status → SELECT 1 + heartbeat read → Cloudflare D1`
 
-The browser reads stored results from `/api/status` and `/api/history?window=24h|7d`.
+The browser reads stored results from `/api/status` and `/api/history?window=24h`.
 Opening the dashboard does not trigger Render checks. It refreshes every minute
 while visible. Results older than ten minutes show as stale. Render timeouts,
 invalid responses, and transport errors show the backend as unavailable and the
@@ -104,7 +105,7 @@ is provisioned by this source code. Initial cloud deployment requires your crede
 
 - `GET /api/status`: latest sanitized component snapshot, latest check time, last
   operational time, and stale flag. No samples returns a successful empty response.
-- `GET /api/history?window=24h|7d`: time slots, sampled uptime, coverage, and incidents.
+- `GET /api/history?window=24h`: time slots, sampled uptime, coverage, and incidents.
 - Invalid windows return 400; storage errors return a safe 503. Successful monitoring
   API responses cache for 30 seconds. APIs read D1 only and accept no target URL input.
 

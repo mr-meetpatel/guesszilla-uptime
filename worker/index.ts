@@ -37,10 +37,9 @@ export default {
       }
       if (url.pathname === "/api/history") {
         const window = url.searchParams.get("window") ?? "24h";
-        if (!["24h", "7d"].includes(window))
-          return json({ error: "invalid_window" }, 400);
+        if (window !== "24h") return json({ error: "invalid_window" }, 400);
         const end = Date.now();
-        const start = end - (window === "7d" ? RETENTION : 86_400_000);
+        const start = end - RETENTION;
         const { results } = await env.DB.prepare(
           "SELECT slot, status FROM checks WHERE slot >= ? AND slot <= ? ORDER BY slot",
         )

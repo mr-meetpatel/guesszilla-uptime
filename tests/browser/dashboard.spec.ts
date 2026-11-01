@@ -36,13 +36,14 @@ test("healthy status, history periods and mobile layout", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByText("All systems operational")).toBeVisible();
   await expect(page.getByText("100.00%")).toBeVisible();
-  const request = page.waitForRequest("**/api/history?window=7d");
-  await page.getByRole("button", { name: "7 days" }).click();
+  const request = page.waitForRequest("**/api/history?window=24h");
+  await page.getByRole("button", { name: "24 hours" }).click();
   await request;
-  await expect(page.getByRole("button", { name: "7 days" })).toHaveAttribute(
+  await expect(page.getByRole("button", { name: "24 hours" })).toHaveAttribute(
     "aria-pressed",
     "true",
   );
+  await expect(page.getByRole("button", { name: "7 days" })).toHaveCount(0);
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
