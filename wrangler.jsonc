@@ -8,7 +8,9 @@
     "binding": "ASSETS",
     "run_worker_first": ["/api/*"],
   },
-  "triggers": { "crons": ["*/5 * * * *"] },
+  "triggers": {
+    "crons": ["* * * * *"],
+  },
   "vars": {
     "BACKEND_STATUS_URL": "https://YOUR-SERVICE.onrender.com/health/status",
   },
@@ -19,6 +21,14 @@
       "database_id": "00000000-0000-0000-0000-000000000000",
       "migrations_dir": "migrations",
     },
+    {
+      "binding": "guesszilla_uptime",
+      "database_name": "guesszilla-uptime",
+      "database_id": "6d493993-6c05-44fe-8937-8e2bf5e0539b",
+      "remote": true,
+    },
   ],
-  "observability": { "enabled": true },
+  "observability": {
+    "enabled": true,
+  },
 }

@@ -1,6 +1,6 @@
 import type { State, Component, Snapshot, Sample } from "../shared/types";
 export type { Snapshot, Sample } from "../shared/types";
-export const INTERVAL = 300_000;
+export const INTERVAL = 60_000;
 export const RETENTION = 7 * 24 * 60 * 60 * 1000;
 export interface Env {
   DB: D1Database;

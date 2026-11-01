@@ -37,7 +37,7 @@ Open the URL printed by Wrangler (normally `http://localhost:8787`). Trigger a l
 scheduled check, without waiting five minutes:
 
 ```sh
-curl 'http://localhost:8787/__scheduled?cron=*/5+*+*+*+*'
+curl 'http://localhost:8787/__scheduled?cron=*+*+*+*+*'
 curl http://localhost:8787/api/status
 ```
 
