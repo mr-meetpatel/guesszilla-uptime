@@ -1,8 +1,11 @@
 import { readFile, writeFile, unlink } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
-const config = JSON.parse(
-  await readFile(new URL("../wrangler.jsonc", import.meta.url), "utf8"),
+import { parseWranglerConfig } from "./wrangler-config.mjs";
+const configSource = await readFile(
+  new URL("../wrangler.jsonc", import.meta.url),
+  "utf8",
 );
+const config = parseWranglerConfig(configSource);
 const database =
   process.env.CLOUDFLARE_D1_DATABASE_ID || config.d1_databases[0].database_id;
 const target = process.env.BACKEND_STATUS_URL || config.vars.BACKEND_STATUS_URL;

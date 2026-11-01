@@ -18,6 +18,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "5.20261101.1",
     "@playwright/test": "1.64.1",
+    "jsonc-parser": "3.3.1",
     "miniflare": "5.20261023.3-beta",
     "prettier": "3.9.10",
     "typescript": "7.0.2",
