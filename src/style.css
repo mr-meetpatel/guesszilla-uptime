@@ -1,0 +1,368 @@
+/* System fallbacks keep the status page independent of external font services. */
+@media (max-width: 760px) {
+  .hero {
+    overflow: hidden;
+  }
+  .metrics {
+    flex-wrap: wrap;
+  }
+  .component {
+    min-width: 0;
+  }
+}
+:root {
+  font-family: "DM Sans", system-ui, sans-serif;
+  color: #dce7e8;
+  background: #101a24;
+  font-synthesis: none;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1120px;
+  padding: 0 32px;
+  margin: auto;
+}
+header {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #2b3944;
+}
+.brand {
+  color: #101a24;
+  background: #c0ef94;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.brand span {
+  position: absolute;
+  left: 58px;
+  white-space: nowrap;
+  color: #dce7e8;
+  font:
+    600 16px "DM Sans",
+    sans-serif;
+}
+.tag,
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.17em;
+  font-weight: 700;
+}
+.tag {
+  color: #9baeb9;
+}
+.hero {
+  padding: 76px 0 50px;
+  position: relative;
+}
+.hero:after {
+  content: "▦";
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  font-size: 280px;
+  color: #22333c;
+  transform: rotate(-12deg);
+  z-index: -1;
+}
+.eyebrow {
+  color: #a8c4af;
+}
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk", sans-serif;
+}
+h1 {
+  font-size: clamp(48px, 7vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+  margin: 20px 0;
+}
+h2 {
+  letter-spacing: -0.025em;
+  font-size: 25px;
+  margin: 0;
+}
+.intro {
+  color: #9eafb9;
+  line-height: 1.7;
+  max-width: 400px;
+}
+.summary {
+  padding: 28px;
+  border: 1px solid #425342;
+  border-radius: 16px;
+  background: #1a2c2b;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.summary p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #a7bab6;
+  line-height: 1.7;
+}
+.beacon {
+  width: 13px;
+  height: 13px;
+  background: #b8ec92;
+  border-radius: 50%;
+  box-shadow: 0 0 0 7px #b8ec9216;
+  flex-shrink: 0;
+}
+.summary.degraded,
+.summary.unavailable {
+  background: #302923;
+  border-color: #614e3c;
+}
+.degraded .beacon,
+.unavailable .beacon {
+  background: #f3b86a;
+}
+.summary.stale,
+.summary.pending {
+  background: #1c2833;
+  border-color: #3d4b58;
+}
+.stale .beacon,
+.pending .beacon {
+  background: #8a9ca9;
+}
+.components {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 20px 0 65px;
+}
+.component {
+  padding: 22px 18px;
+  border: 1px solid #2b3944;
+  border-radius: 12px;
+  background: #14212c;
+}
+.component h3 {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  color: #acbdc6;
+}
+.state {
+  font-size: 23px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 19px 0 10px;
+  letter-spacing: -0.03em;
+}
+.state.up {
+  color: #c0ef94;
+}
+.state.down {
+  color: #f3b86a;
+}
+.state.unknown,
+.state.not_applicable {
+  color: #9eafb9;
+}
+.detail {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #8399a7;
+  margin: 0;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.section-heading .eyebrow {
+  margin: 0 0 14px;
+}
+.windows {
+  border: 1px solid #3a4954;
+  border-radius: 9px;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+}
+.windows button {
+  padding: 9px 15px;
+  background: none;
+  border: none;
+  color: #9eafb9;
+  cursor: pointer;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 12px;
+}
+.windows button[aria-pressed="true"] {
+  color: #101a24;
+  background: #c0ef94;
+}
+.metrics {
+  display: flex;
+  gap: 65px;
+  margin: 30px 0;
+}
+.metrics p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  gap: 8px;
+}
+.metrics strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+}
+.metrics span {
+  font-size: 11px;
+  color: #9eafb9;
+}
+.timeline {
+  display: flex;
+  gap: 1px;
+  height: 42px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.sample {
+  flex: 1;
+  min-width: 0;
+  background: #31434e;
+}
+.sample.operational {
+  background: #b1df8b;
+}
+.sample.degraded,
+.sample.unavailable {
+  background: #dc9d59;
+}
+.legend {
+  display: flex;
+  gap: 25px;
+  color: #aab9c2;
+  font-size: 11px;
+  margin: 15px 0;
+}
+.legend span:first-child {
+  color: #b1df8b;
+}
+.legend span:nth-child(2) {
+  color: #dc9d59;
+}
+.note {
+  color: #8196a4;
+  font-size: 11px;
+  line-height: 1.8;
+}
+.incidents {
+  margin: 55px 0 70px;
+}
+.incidents h2 {
+  margin-bottom: 25px;
+}
+#incidents {
+  font-size: 13px;
+  color: #9eafb9;
+  padding: 22px 0;
+  border-top: 1px solid #2b3944;
+}
+.incident {
+  padding: 15px 0;
+  border-bottom: 1px solid #2b3944;
+}
+.incident strong {
+  color: #edbd86;
+  text-transform: capitalize;
+}
+.incident p {
+  font-size: 12px;
+  margin: 8px 0;
+}
+footer {
+  border-top: 1px solid #2b3944;
+  padding: 25px 0 40px;
+  font-size: 11px;
+  color: #8399a7;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+#error {
+  background: #392b28;
+  padding: 18px;
+  border-radius: 8px;
+  color: #f3c6ac;
+  font-size: 13px;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #c0ef94;
+  outline-offset: 4px;
+}
+@media (max-width: 760px) {
+  main {
+    padding: 0 20px;
+  }
+  .tag {
+    display: none;
+  }
+  .hero {
+    padding-top: 48px;
+  }
+  .hero:after {
+    font-size: 170px;
+    right: 0;
+    top: 50px;
+  }
+  .components {
+    grid-template-columns: repeat(2, 1fr);
+    margin-bottom: 45px;
+  }
+  .summary {
+    padding: 22px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .metrics {
+    gap: 30px;
+  }
+  .metrics strong {
+    font-size: 24px;
+  }
+  .legend {
+    gap: 12px;
+    font-size: 9px;
+  }
+  footer {
+    flex-direction: column;
+  }
+  .brand span {
+    font-size: 14px;
+  }
+}

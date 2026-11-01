@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#101a24" />
+    <title>Wordle · System status</title>
+  </head>
+  <body>
+    <main>
+      <header>
+        <a href="/" class="brand">W<span>Wordle infrastructure</span></a
+        ><span class="tag">PUBLIC STATUS</span>
+      </header>
+      <section class="hero">
+        <p class="eyebrow">A clear view of what’s running.</p>
+        <h1>Small squares.<br />Big picture.</h1>
+        <p class="intro">
+          Independent checks for the services behind your daily Wordle ritual.
+        </p>
+      </section>
+      <section id="summary" class="summary" aria-live="polite">
+        <span class="beacon"></span>
+        <div>
+          <h2 id="overall">Checking system status…</h2>
+          <p id="freshness">Loading the latest scheduled check.</p>
+        </div>
+      </section>
+      <p id="error" role="alert" hidden></p>
+      <section
+        id="components"
+        class="components"
+        aria-label="Service components"
+      ></section>
+      <section class="history">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE TRACK RECORD</p>
+            <h2>Availability, observed.</h2>
+          </div>
+          <div class="windows" aria-label="History period">
+            <button data-window="24h" aria-pressed="true">24 hours</button
+            ><button data-window="7d" aria-pressed="false">7 days</button>
+          </div>
+        </div>
+        <div class="metrics">
+          <p><strong id="uptime">—</strong><span>Sampled uptime</span></p>
+          <p>
+            <strong id="coverage">—</strong><span>Monitoring coverage</span>
+          </p>
+          <p><strong>5 min</strong><span>Check interval</span></p>
+        </div>
+        <div
+          id="timeline"
+          class="timeline"
+          aria-label="Availability samples"
+        ></div>
+        <div class="legend">
+          <span>● Operational</span><span>● Degraded / unavailable</span
+          ><span>● No observation</span>
+        </div>
+        <p class="note">
+          Uptime uses recorded samples only. Gaps are unknown, not successful
+          checks. Checks run even when this page is closed.
+        </p>
+      </section>
+      <section class="incidents">
+        <p class="eyebrow">RECENT SIGNALS</p>
+        <h2>Observed incidents</h2>
+        <div id="incidents">Loading observations…</div>
+      </section>
+      <footer>
+        <span>Independent monitor · Cloudflare</span
+        ><span>Render + Supabase · Free-tier availability is best effort</span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "wordle-uptime",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && wrangler dev --test-scheduled",
+    "build": "vite build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "tsc --noEmit && tsc -p tsconfig.worker.json",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "db:local": "wrangler d1 migrations apply wordle-uptime --local",
+    "db:remote": "wrangler d1 migrations apply wordle-uptime --remote",
+    "deploy": "npm run build && node scripts/deploy.mjs"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20261101.1",
+    "@playwright/test": "1.64.1",
+    "miniflare": "5.20261023.3-beta",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
+    "vitest": "5.0.5",
+    "wrangler": "4.156.0"
+  }
+}
