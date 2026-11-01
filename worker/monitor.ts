@@ -52,7 +52,8 @@ export async function probe(url: string): Promise<Snapshot> {
       throw new Error("invalid_target");
     const response = await fetch(target, {
       signal: AbortSignal.timeout(70_000),
-      redirect: "error",
+      // Workers supports manual/follow only; reject 3xx below without following.
+      redirect: "manual",
       headers: { Accept: "application/json" },
       cache: "no-store",
     });
