@@ -9,7 +9,7 @@
     "run_worker_first": ["/api/*"],
   },
   "triggers": {
-    "crons": ["* * * * *"],
+    "crons": ["*/3 * * * *"],
   },
   "vars": {
     "BACKEND_STATUS_URL": "https://YOUR-SERVICE.onrender.com/health/status",

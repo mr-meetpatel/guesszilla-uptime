@@ -2,7 +2,7 @@
 
 An independent, lightweight public status dashboard for the Wordle Slack bot.
 Cloudflare Workers hosts the page and API; a scheduled Worker checks Render every
-five minutes and retains seven days of samples in Cloudflare D1. No monitoring
+three minutes and retains seven days of samples in Cloudflare D1. No monitoring
 history is written to Supabase and no database credentials leave the backend.
 
 ## How it works
@@ -18,7 +18,7 @@ database as unknown. The monitor allows 70 seconds for a cold start.
 History shows sampled availability, not exact continuous uptime. Missing observations
 are excluded from uptime calculations and displayed as gaps with a separate coverage
 percentage. Incident intervals group consecutive degraded/unavailable samples.
-The current five-minute slot is excluded from history until it finishes. A successful
+The current three-minute slot is excluded from history until it finishes. A successful
 sample means all applicable components were healthy. There are no outbound alerts.
 
 ## Local setup
@@ -34,10 +34,10 @@ npm run dev
 ```
 
 Open the URL printed by Wrangler (normally `http://localhost:8787`). Trigger a local
-scheduled check, without waiting five minutes:
+scheduled check, without waiting three minutes:
 
 ```sh
-curl 'http://localhost:8787/__scheduled?cron=*+*+*+*+*'
+curl 'http://localhost:8787/__scheduled?cron=*/3+*+*+*+*'
 curl http://localhost:8787/api/status
 ```
 
