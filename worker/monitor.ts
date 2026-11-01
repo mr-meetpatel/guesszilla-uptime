@@ -111,7 +111,13 @@ export async function probe(url: string): Promise<Snapshot> {
     )
       throw new Error("inconsistent_snapshot");
     return result;
-  } catch {
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        event: "probe_failed",
+        reason: error instanceof Error ? error.message : "unknown_error",
+      }),
+    );
     return { ...fallback, checked_at: new Date().toISOString() };
   }
 }
